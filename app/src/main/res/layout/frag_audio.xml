@@ -4,6 +4,7 @@
     android:id="@+id/audioFrag"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darkgray"
     tools:context=".AudioFragment">
 
     <ImageView
@@ -25,6 +26,7 @@
         android:layout_marginTop="300dp"
         android:text="Bob Marley - Natural Mystic"
         android:textSize="18dp"
+        android:textColor="@color/silver"
         android:textAlignment="center"
         android:textStyle="bold" />
 
@@ -42,8 +44,7 @@
         android:layout_marginBottom="80dp"
         android:layout_marginStart="20dp"
         android:onClick="executarSom"
-        android:background="@color/white"
-        android:src="@drawable/baseline_play"
+        android:background="@drawable/baseline_play"
         android:layout_gravity="start|bottom"/>
 
     <ImageButton
@@ -52,8 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
         android:onClick="pausarSom"
-        android:background="@color/white"
-        android:src="@drawable/baseline_pause"
+        android:background="@drawable/baseline_pause"
         android:layout_gravity="center|bottom" />
 
     <ImageButton
@@ -63,8 +63,7 @@
         android:layout_marginBottom="80dp"
         android:layout_marginEnd="20dp"
         android:onClick="pararSom"
-        android:background="@color/white"
-        android:src="@drawable/baseline_stop"
+        android:background="@drawable/baseline_stop"
         android:layout_gravity="end|bottom"
         />
 
