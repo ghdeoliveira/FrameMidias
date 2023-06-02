@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/darkgray"
     tools:context=".VideoFragment">
 
@@ -76,14 +77,20 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/thumb"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="180dp"
-        android:src="@drawable/img"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/youtube_player_view"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="180dp"
+            app:videoId="UZfaIx57UqU" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/timeline"

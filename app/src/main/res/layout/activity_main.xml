@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/background"
     android:orientation="vertical"
     android:padding="10dp"
     tools:context=".MainActivity">
@@ -12,22 +13,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:orientation="horizontal">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonAudio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Áudio" />
+            android:layout_marginEnd="5dp"
+            android:text="Áudio"
+            android:backgroundTint="@color/btn_bkg_color"
+            android:textColor="@color/btn_txt_color"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonVideo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Vídeo" />
+            android:layout_marginStart="5dp"
+            android:text="Vídeo"
+            android:backgroundTint="@color/btn_bkg_color"
+            android:textColor="@color/btn_txt_color"/>
+
     </LinearLayout>
 
     <LinearLayout
