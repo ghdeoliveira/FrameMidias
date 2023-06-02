@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/audioFrag"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AudioFragment">
+
+    <ImageView
+        android:id="@+id/imgAudio"
+        android:layout_marginTop="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="top|center"
+        android:adjustViewBounds="true"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bob1"/>
+
+    <TextView
+        android:id="@+id/descricao"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="300dp"
+        android:text="Bob Marley - Natural Mystic"
+        android:textSize="18dp"
+        android:textAlignment="center"
+        android:textStyle="bold" />
+
+    <SeekBar
+        android:id="@+id/seekBarVolume"
+        android:layout_width="300dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="370dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <ImageButton
+        android:id="@+id/play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:layout_marginStart="20dp"
+        android:onClick="executarSom"
+        android:background="@color/white"
+        android:src="@drawable/baseline_play"
+        android:layout_gravity="start|bottom"/>
+
+    <ImageButton
+        android:id="@+id/pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:onClick="pausarSom"
+        android:background="@color/white"
+        android:src="@drawable/baseline_pause"
+        android:layout_gravity="center|bottom" />
+
+    <ImageButton
+        android:id="@+id/stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="20dp"
+        android:onClick="pararSom"
+        android:background="@color/white"
+        android:src="@drawable/baseline_stop"
+        android:layout_gravity="end|bottom"
+        />
+
+</FrameLayout>
