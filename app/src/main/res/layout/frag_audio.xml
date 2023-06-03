@@ -55,7 +55,6 @@
             android:layout_gravity="center_horizontal"
             android:thumbTint="@color/chineeseblack"
             android:progressTint="@color/silver"
-            android:progress="30"
             android:layout_marginTop="20dp" />
 
         <RelativeLayout
@@ -135,8 +134,7 @@
                 android:thumbTint="@color/chineeseblack"
                 android:progressTint="@color/silver"
                 android:layout_gravity="center"
-                android:padding="5dp"
-                android:progress="30" />
+                android:padding="5dp" />
 
             <ImageView
                 android:layout_width="wrap_content"
