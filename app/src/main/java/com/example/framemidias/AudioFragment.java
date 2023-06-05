@@ -1,22 +1,17 @@
 package com.example.framemidias;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class AudioFragment extends Fragment implements View.OnClickListener {
 
-    TextView nomeCantor, nomeMusica, musicTime, musicDuration;
     MediaPlayer musicPlayer;
 
     public AudioFragment() {
@@ -123,29 +118,14 @@ public class AudioFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.buttonPlay) {
-            if(musicPlayer.isPlaying()) {
-                // is playing
-                musicPlayer.pause();
-            } else {
-                // on pause
-                musicPlayer.start();
-            }
+            musicPlayer.start();
         } else if (view.getId() == R.id.buttonPause) {
-            if(musicPlayer.isPlaying()) {
-                // is playing
                 musicPlayer.pause();
-            } else {
-                // on pause
-                musicPlayer.start();
-            }
         } else if (view.getId() == R.id.buttonStop) {
             if(musicPlayer.isPlaying()) {
                 musicPlayer.stop();
-                musicPlayer.setLooping(true);
+                musicPlayer = MediaPlayer.create(getContext(), R.raw.bob);
             }
-        } else {
-            musicPlayer.stop();
-            musicPlayer.reset();
         }
     }
 
