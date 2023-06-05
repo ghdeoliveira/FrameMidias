@@ -1,5 +1,7 @@
 package com.example.framemidias;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,9 +14,23 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.google.android.exoplayer2.ExoPlayer;
+import com.google.android.exoplayer2.MediaItem;
+import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
+import com.google.android.exoplayer2.extractor.ExtractorsFactory;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
+import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.upstream.BandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
+import com.google.android.exoplayer2.util.Log;
+
 public class VideoFragment extends Fragment implements View.OnClickListener {
 
-    MediaPlayer videoPlayer;
+    PlayerView exoPlayerView;
+    String videoURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4";
 
     public VideoFragment() {
         // Required empty public constructor
@@ -27,25 +43,16 @@ public class VideoFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.frag_video, container, false);
 
-        VideoView videoView = (VideoView)view.findViewById(R.id.videoView);
-        String videoPath = "android.resource://" + getActivity().getPackageName() + "/" + R.raw.mr_robot;
-        Uri uri = Uri.parse(videoPath);
-        videoView.setVideoURI(uri);
+        exoPlayerView = (PlayerView)view.findViewById(R.id.exoPlayerView);
+        ExoPlayer exoPlayer = new ExoPlayer.Builder(getContext()).build();
+        exoPlayerView.setPlayer(exoPlayer);
+        MediaItem mediaItem = MediaItem.fromUri(videoURL);
+        exoPlayer.addMediaItem(mediaItem);
+        exoPlayer.prepare();
+        exoPlayer.setPlayWhenReady(true);
 
-        MediaController mediaController = new MediaController(getActivity());
-        videoView.setMediaController(mediaController);
-        mediaController.setAnchorView(videoView);
-
-        TextView videoTime = (TextView)view.findViewById(R.id.videoTime);
-        TextView videoDuration = (TextView)view.findViewById(R.id.videoDuration);
-
+        AudioManager audioManager = (AudioManager)getActivity().getSystemService(Context.AUDIO_SERVICE);
         SeekBar barVolume = (SeekBar)view.findViewById(R.id.BarVolume);
-        SeekBar barProgress = (SeekBar)view.findViewById(R.id.BarProgress);
-
-        videoPlayer = MediaPlayer.create(getContext(), R.raw.mr_robot);
-        videoPlayer.setLooping(true);
-        videoPlayer.seekTo(0);
-        videoPlayer.setVolume(0.5f, 0.5f);
 
         // Controle de volume
         barVolume.setProgress(50);
@@ -53,56 +60,13 @@ public class VideoFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean isFromUser) {
                 float volume = progress / 100f;
-                videoPlayer.setVolume(volume,volume);
+                exoPlayer.setVolume(volume);
              }
-
              @Override
              public void onStartTrackingTouch(SeekBar seekBar) {}
              @Override
              public void onStopTrackingTouch(SeekBar seekBar) {}
         });
-
-        // Controle de progresso do vídeo
-        String duration = millisecondsToString(videoPlayer.getDuration());
-        videoDuration.setText(duration);
-
-        barProgress.setMax(videoPlayer.getDuration());
-        barProgress.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean isFromUser) {
-                if(isFromUser) {
-                    videoPlayer.seekTo(progress);
-                    seekBar.setProgress(progress);
-                }
-            }
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
-
-         new Thread(new Runnable() {
-             @Override
-             public void run() {
-                 while (videoPlayer != null) {
-                     if(videoPlayer.isPlaying()) {
-                         try {
-                             final double current = videoPlayer.getCurrentPosition();
-                             final String elapsedTime = millisecondsToString((int) current);
-                             getActivity().runOnUiThread(new Runnable() {
-                                 @Override
-                                 public void run() {
-                                     videoTime.setText(elapsedTime);
-                                     barProgress.setProgress((int) current);
-                                 }
-                             });
-                             Thread.sleep(1000);
-                         } catch (InterruptedException e) {}
-                     }
-                 }
-             }
-         }).start();
-
 
          return view;
     }
@@ -110,27 +74,12 @@ public class VideoFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.btnPlay) {
-            videoPlayer.start();
+            exoPlayerView.onResume();
         } else if (view.getId() == R.id.btnPause) {
-            videoPlayer.pause();
-        } else if (view.getId() == R.id.buttonStop) {
-            if(videoPlayer.isPlaying()) {
-                videoPlayer.stop();
-                videoPlayer = MediaPlayer.create(getContext(), R.raw.mr_robot);
-            }
+            exoPlayerView.onPause();
+        } else if (view.getId() == R.id.btnRePlay) {
+            //exoPlayerView.on
         }
-    }
 
-    public String millisecondsToString(int time) {
-        String elapsedTime = "";
-        int minutes = time / 1000 / 60;
-        int seconds = time / 1000 % 60;
-        elapsedTime = minutes+":";
-        if(seconds < 10) {
-            elapsedTime += "0";
-        }
-        elapsedTime += seconds;
-
-        return elapsedTime;
     }
 }

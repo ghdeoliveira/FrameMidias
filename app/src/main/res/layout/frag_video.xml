@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/darkgray"
     tools:context=".VideoFragment"
     android:layout_gravity="center">
@@ -13,36 +14,10 @@
         android:gravity="center|center_horizontal"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="30dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_volume_mute" />
-
-            <SeekBar
-                android:id="@+id/BarVolume"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:thumbTint="@color/chineeseblack"
-                android:progressTint="@color/silver"
-                android:layout_gravity="center" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_volume_up" />
-        </LinearLayout>
-
         <TextView
             android:id="@+id/nome_serie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:text="@string/serie_name"
             android:textColor="@color/white"
             android:textSize="20sp" />
@@ -54,7 +29,7 @@
             android:text="@string/serie_ep"
             android:textColor="@color/white"
             android:textSize="18dp" />
-
+<!--
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,36 +41,21 @@
                 android:layout_height="250dp"
                 android:layout_marginTop="30dp" />
         </LinearLayout>
-
-        <SeekBar
-            android:id="@+id/BarProgress"
-            android:layout_width="300dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
-            android:progressTint="@color/silver"
-            android:thumbTint="@color/chineeseblack" />
-
-        <RelativeLayout
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
-
-            <TextView
-                android:id="@+id/videoTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0:00"
-                android:textColor="#FFFFFF" />
-
-            <TextView
-                android:id="@+id/videoDuration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="0:00"
-                android:textColor="#FFFFFF" />
-        </RelativeLayout>
+-->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <com.google.android.exoplayer2.ui.PlayerView
+                android:id="@+id/exoPlayerView"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginTop="30dp"
+                android:focusable="true"
+                android:keepScreenOn="true"
+                app:use_controller="true"
+                app:resize_mode="fill">
+            </com.google.android.exoplayer2.ui.PlayerView>
+        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/control"
@@ -108,7 +68,8 @@
                 android:id="@+id/btnRePlay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_replay" />
+                android:background="@drawable/ic_replay"
+                android:clickable="true" />
 
             <ImageButton
                 android:id="@+id/btnPlay"
@@ -116,16 +77,42 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="60dp"
                 android:layout_marginRight="60dp"
-                android:background="@drawable/baseline_play" />
+                android:background="@drawable/baseline_play"
+                android:clickable="true" />
 
             <ImageButton
                 android:id="@+id/btnPause"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/baseline_pause" />
+                android:background="@drawable/baseline_pause"
+                android:clickable="true" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="30dp">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_volume_mute" />
+
+            <SeekBar
+                android:id="@+id/BarVolume"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:progressTint="@color/silver"
+                android:thumbTint="@color/chineeseblack" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_volume_up" />
+        </LinearLayout>
 
     </LinearLayout>
 
